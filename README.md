@@ -4,3 +4,6 @@ Given the user is logged in, when there is a specified city, should see the numb
 Given the user is logged in and offline, should see a list of last updated events
 Users should be able to access shortcut to app from desktop
 Given user logged in, and event selected should see data pertaining to specified event 
+
+
+Using serverless functions in this app is going to be crucial in its scalability. If many users log onto the application, looking for information regarding an event, they will not experience delays due to slow performance of the app. 
