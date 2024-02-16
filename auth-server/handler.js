@@ -1,14 +1,13 @@
 "use strict";
 
-const { google } = require("googleapis"); //import package
+const { google } = require("googleapis");
 const calendar = google.calendar("v3");
 const SCOPES = [
   "https://www.googleapis.com/auth/calendar.events.public.readonly",
-]; //set access levels
-const { CLIENT_SECRET, CLIENT_ID, CALENDAR_ID } = process.env; //value being reffered to in config.json
+];
+const { CLIENT_SECRET, CLIENT_ID, CALENDAR_ID } = process.env;
 const redirect_uris = ["https://Mattprotz.github.io/meet/"];
 
-//from google api method called and created, accepts client id, client secret and redirect url as params
 const oAuth2Client = new google.auth.OAuth2(
   CLIENT_ID,
   CLIENT_SECRET,
@@ -34,15 +33,9 @@ module.exports.getAuthURL = async () => {
 };
 
 module.exports.getAccessToken = async (event) => {
-  // Decode authorization code extracted from the URL query
   const code = decodeURIComponent(`${event.pathParameters.code}`);
 
   return new Promise((resolve, reject) => {
-    /**
-     *  Exchange authorization code for access token with a “callback” after the exchange,
-     *  The callback in this case is an arrow function with the results as parameters: “error” and “response”
-     */
-
     oAuth2Client.getToken(code, (error, response) => {
       if (error) {
         return reject(error);
@@ -51,7 +44,6 @@ module.exports.getAccessToken = async (event) => {
     });
   })
     .then((results) => {
-      // Respond with OAuth token
       return {
         statusCode: 200,
         headers: {
@@ -62,10 +54,53 @@ module.exports.getAccessToken = async (event) => {
       };
     })
     .catch((error) => {
-      // Handle error
       return {
         statusCode: 500,
         body: JSON.stringify(error),
+      };
+    });
+};
+
+module.exports.getCalendarEvents = async (event) => {
+  return new Promise((resolve, reject) => {
+    const accessToken = event.headers.Authorization;
+    oAuth2Client.setCredentials({ access_token: accessToken });
+
+    // Placeholder for fetching calendar events (replace this with your implementation)
+    calendar.events.list(
+      {
+        calendarId: CALENDAR_ID,
+        auth: oAuth2Client,
+        timeMin: new Date().toISOString(),
+        singleEvents: true,
+        orderBy: "startTime",
+      },
+      (err, res) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(res.data.items);
+      }
+    );
+  })
+    .then((events) => {
+      return {
+        statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true,
+        },
+        body: JSON.stringify({ events }),
+      };
+    })
+    .catch((error) => {
+      return {
+        statusCode: 500,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": true,
+        },
+        body: JSON.stringify({ error: "Internal Server Error" }),
       };
     });
 };
