@@ -66,7 +66,6 @@ module.exports.getCalendarEvents = async (event) => {
     const accessToken = event.headers.Authorization;
     oAuth2Client.setCredentials({ access_token: accessToken });
 
-    // Placeholder for fetching calendar events (replace this with your implementation)
     calendar.events.list(
       {
         calendarId: CALENDAR_ID,
