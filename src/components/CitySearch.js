@@ -1,9 +1,21 @@
 import { useState } from "react";
 
-const CitySearch = ({ allLocations }) => {
+export default function CitySearch ({ allLocations }) {
   const [showSuggestions, setShowSuggestions] = useState(false); //set to false for default value, no show unless input field is in focus"
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+
+  const handleInputChanged = (event) => {
+    const value = event.target.value;
+    const filteredLocations = allLocations
+      ? allLocations.filter((location) => {
+          return location.toUpperCasse().indexOf(value.toUpperCase()) > -1;
+        })
+      : [];
+    setQuery(value);
+    setSuggestions(filteredLocations);
+  };
+
   return (
     <div id="city-search">
       <input
@@ -27,15 +39,3 @@ const CitySearch = ({ allLocations }) => {
   );
 };
 
-const handleInputChanged = (event) => {
-  const value = event.target.value;
-  const filteredLocations = allLocations
-    ? allLocations.filter((location) => {
-        return location.toUpperCasse().indexOf(value.toUpperCase()) > -1;
-      })
-    : [];
-  setQuery(value);
-  setSuggestions(filteredLocations);
-};
-
-export default CitySearch;
