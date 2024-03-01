@@ -6,6 +6,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { toHaveClass } from "@testing-library/jest-dom/matchers";
 
 import App from "../App";
+import all from "all";
 
 describe("<CitySearch/> component", () => {
   const view = () => render(<CitySearch allLocations={[]} />);
@@ -44,6 +45,7 @@ describe("<CitySearch/> component", () => {
 
     const cityTextBox = view.screen.queryByRole("textbox");
     await user.type(cityTextBox, "Berlin");
+    
 
     const suggestions = allLocations
       ? allLocations.filter((location) => {
@@ -78,4 +80,18 @@ describe("<CitySearch/> integration", () => {
       within(CitySearchDOM).screen.queryAllByRole("listitem");
     expect(suggestionListItems.length).toBe(allLocations.length + 1);
   });
+  test('renders suggestion text in the texbox upon clicking suggestion', async()=>{
+    const user = userEvent.setup();
+    const view = render(<CitySearch/>)
+    const allEvents = await getEvents();
+    const allLocations = extractLocations(allEvents);
+    view.rerender(<CitySearch allLocations={allLocations} setCurrentCity={()=>{}}/>)
+    const cityTextBox = view.queryAllByRole('textbox');
+    await user.type(cityTextBox, "Berlin");
+
+    const BerlinGermanySuggestion = view.queryAllByRole('listitem')[0];
+
+    await user.click(BerlinGermanySuggestion);
+    expect(cityTextBox).toHaveValue(BerlinGermanySuggestion.textContent);
+  })
 });

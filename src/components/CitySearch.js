@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function CitySearch ({ allLocations }) {
+export default function CitySearch ({ allLocations, setCurrentCity }) {
   const [showSuggestions, setShowSuggestions] = useState(false); //set to false for default value, no show unless input field is in focus"
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -15,6 +15,13 @@ export default function CitySearch ({ allLocations }) {
     setQuery(value);
     setSuggestions(filteredLocations);
   };
+
+  const handleItemClicked = (event) => {
+    const value= event.target.textContent;
+    setQuery(value);
+    setShowSuggestions(false);
+    setCurrentCity(value);
+  }
 
 //use stringified value of allLocations prop as dependency
   useEffect(()=>{
