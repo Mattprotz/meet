@@ -65,20 +65,18 @@ describe("<CitySearch/> integration", () => {
   test("render suggestion list when app is rendered", async () => {
     const user = userEvent.setup();
     render(<App />);
-    // const AppDOM = view.container.firstChild;
+
     const CitySearchDOM = screen.getByTestId("city-search");
     const cityTextBox = screen.getByTestId("city-search-input");
-
     await user.click(cityTextBox);
 
     const allLocations = extractLocations(mockData);
-
     const suggestionListItems =
       within(CitySearchDOM).getAllByRole("listitem");
     expect(suggestionListItems.length).toBe(allLocations.length + 1);
   });
 
-  test.skip("renders suggestion text in the texbox upon clicking suggestion", async () => {
+  test("renders suggestion text in the texbox upon clicking suggestion", async () => {
     const user = userEvent.setup();
     const view = render(<CitySearch />);
     const allEvents = await getEvents();
