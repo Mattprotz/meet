@@ -22,9 +22,6 @@ describe("<App/> integration", () => {
   test("renders a list of events matching the city selected by the user", async () => {
     const user = userEvent.setup();
     render(<App />);
-    // const AppDOM = view.container.firstChild;
-
-    // const CitySearchDOM = AppDOM.querySelector("#city-search");
     const CitySearchInput = screen.getByTestId('city-search-input')
 
     await waitFor(async () => {
@@ -33,9 +30,7 @@ describe("<App/> integration", () => {
       await user.click(berlinSuggestionItem);
     });
 
-    // const EventListDOM = screen.getByTestId("event-list");
     const allRenderedEventItems = screen.getAllByRole('listitem');
-
     const allEvents = await getEvents();
     const berlinEvents = allEvents.filter(
       event => event.location === "Berlin, Germany"
