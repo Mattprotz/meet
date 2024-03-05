@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function CitySearch ({ allLocations, setCurrentCity }) {
+export default function CitySearch({ allLocations, setCurrentCity }) {
   const [showSuggestions, setShowSuggestions] = useState(false); //set to false for default value, no show unless input field is in focus"
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -17,20 +17,21 @@ export default function CitySearch ({ allLocations, setCurrentCity }) {
   };
 
   const handleItemClicked = (event) => {
-    const value= event.target.textContent;
+    const value = event.target.textContent;
     setQuery(value);
     setShowSuggestions(false);
     setCurrentCity(value);
-  }
+  };
 
-//use stringified value of allLocations prop as dependency
-  useEffect(()=>{
+  //use stringified value of allLocations prop as dependency
+  useEffect(() => {
     setSuggestions(allLocations);
-  }, ['${allLocations}']);
+  }, [allLocations]);
 
   return (
-    <div id="city-search">
+    <div id="city-search" data-testId="city-search">
       <input
+        data-testId="city-search-input"
         type="text"
         className="city"
         placeholder="Search for a City"
@@ -38,16 +39,20 @@ export default function CitySearch ({ allLocations, setCurrentCity }) {
         onFocus={() => setShowSuggestions(true)}
         onChange={handleInputChanged}
       />
-      {showSuggestions ? 
-      <ul className="suggestions">
-        {suggestions.map((suggestion)=>{
-            return <li key={suggestion}>{suggestion}</li>
-        })}
-        <li key='See all cities'>
+      {showSuggestions ? (
+        <ul className="suggestions">
+          {suggestions.map((suggestion) => {
+            return (
+              <li onClick={handleItemClicked} key={suggestion}>
+                {suggestion}
+              </li>
+            );
+          })}
+          <li key="See all cities" onClick={handleItemClicked}>
             <b>See all cities</b>
-        </li>
-      </ul> : null}
+          </li>
+        </ul>
+      ) : null}
     </div>
   );
-};
-
+}

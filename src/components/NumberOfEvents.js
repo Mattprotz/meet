@@ -1,5 +1,12 @@
 export default function NumberOfEvents(){
     return (
-        <div>Number of events</div>
+        <div id="NOE">
+            <input
+                type="text"
+                className="noe"
+                placeholder="# of events (default 32)"
+            />
+        </div>
+
     )
 }
