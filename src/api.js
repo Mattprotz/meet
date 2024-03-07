@@ -1,4 +1,7 @@
 import mockData from "./mockData";
+import puppeteer from "puppeteer";
+import NProgress from 'nprogress';
+
 
 export const extractLocations = (events) =>{
     const extractedLocations = events.map((event)=> event.location);
@@ -29,8 +32,11 @@ const removeQuery = () => {
     }
 };
 
-export const getEvents = async() =>{
+export const getEvents = async () =>{
+    NProgress.start();
+
     if(window.location.href.startsWith('http://localhost')){
+        NProgress.done();
         return mockData;
     }
 

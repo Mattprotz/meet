@@ -40,7 +40,7 @@ export default function CitySearch({ allLocations, setCurrentCity }) {
         onChange={handleInputChanged}
       />
       {showSuggestions ? (
-        <ul className="suggestions">
+        <ul className="suggestions" data-testId="suggestions">
           {suggestions.map((suggestion) => {
             return (
               <li onClick={handleItemClicked} key={suggestion}>
