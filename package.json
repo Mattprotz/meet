@@ -7,11 +7,18 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.5.2",
+    "atatus-spa": "^4.6.0",
+    "constants-browserify": "^1.0.0",
+    "latest": "^0.2.0",
     "nprogress": "^0.2.0",
+    "os-browserify": "^0.3.0",
+    "path": "^0.12.7",
+    "path-browserify": "^1.0.1",
     "puppeteer-core": "^22.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "stream": "^0.0.2",
     "web-vitals": "^2.1.4",
     "workbox-background-sync": "^6.6.0",
     "workbox-broadcast-update": "^6.6.0",
@@ -51,6 +58,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   },
   "devDependencies": {
     "gh-pages": "^6.1.1",

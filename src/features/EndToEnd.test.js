@@ -1,5 +1,5 @@
 // import puppeteer from "puppeteer-core/lib/esm/puppeteer/puppeteer-core.js"
-import puppeteer from "puppeteer-core";
+import puppeteer from "puppeteer";
 
 describe('show/hide an event details', () =>{
     let browser;
@@ -10,13 +10,17 @@ describe('show/hide an event details', () =>{
             slowMo: 250,
             timeout: 0 
         })
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.goto('http://localhost:3000/');
+    })
+
+    afterAll(()=>{
+        browser.close();
     })
 
     test('An event element is collapsed by default', async()=>{
-        const browser = await puppeteer.launch();
 
-        const page = await browser.newPage();
-        await page.goto('http://localhost:3000/');
 
         await page.waitForSelector('event');
         const eventDetails = await page.$('.event .details');
