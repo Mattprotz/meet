@@ -1,5 +1,5 @@
 import mockData from "./mockData";
-import puppeteer from 'puppeteer';
+
 import NProgress from 'nprogress';
 
 

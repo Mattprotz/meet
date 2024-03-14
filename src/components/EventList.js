@@ -1,5 +1,6 @@
 import Event from "./Event";
 
+
 export default function EventList({ events =[]}){
     return(
         <ul id="event-list" data-testId="event-list">

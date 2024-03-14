@@ -14,6 +14,7 @@
     "os-browserify": "^0.3.0",
     "path": "^0.12.7",
     "path-browserify": "^1.0.1",
+    "puppeteer": "^18.0.0",
     "puppeteer-core": "^22.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -66,7 +67,6 @@
   },
   "devDependencies": {
     "gh-pages": "^6.1.1",
-    "jest-cucumber": "^3.0.1",
-    "puppeteer": "^18.1.0"
+    "jest-cucumber": "^3.0.1"
   }
 }
