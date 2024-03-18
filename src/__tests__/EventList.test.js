@@ -24,8 +24,8 @@ describe('<EventList/> component', () => {
 //integration tests
 describe('<EventList/> integration' , () => {
   test('render a list of 32 events when  app is mounted and rendered' , async () =>{
-    const AppComponent = render(<App/>);
-    const AppDOM = AppComponent.container.firstChild;
+    render(<App/>);
+    const AppDOM = screen.container.firstChild;
     const EventListDOM = AppDOM.querySelector('#event-list');
     await waitFor(()=>{
       const EventListItems = within(EventListDOM).queryAllByRole('listitem');
