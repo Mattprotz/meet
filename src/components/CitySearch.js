@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function CitySearch({ allLocations, setCurrentCity }) {
+export default function CitySearch({ allLocations, setCurrentCity, setInfoAlert }) {
   const [showSuggestions, setShowSuggestions] = useState(false); //set to false for default value, no show unless input field is in focus"
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -14,6 +14,15 @@ export default function CitySearch({ allLocations, setCurrentCity }) {
       : [];
     setQuery(value);
     setSuggestions(filteredLocations);
+
+
+    let infoText;
+    if(filteredLocations.length === 0){
+      infoText = "We cannot find the city entered, please try another city"
+    }else{
+      infoText = "";
+    }
+    setInfoAlert(infoText)
   };
 
   const handleItemClicked = (event) => {
@@ -21,6 +30,7 @@ export default function CitySearch({ allLocations, setCurrentCity }) {
     setQuery(value);
     setShowSuggestions(false);
     setCurrentCity(value);
+    setInfoAlert("")
   };
 
   //use stringified value of allLocations prop as dependency

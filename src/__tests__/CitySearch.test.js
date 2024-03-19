@@ -36,7 +36,7 @@ describe("<CitySearch/> component", () => {
 
   test("renders updated list of suggestions as user types in cityTextbox", async () => {
     const user = userEvent.setup();
-    render(<CitySearch  allLocations={[]}/>);
+    render(<CitySearch  allLocations={[]}  setInfoAlert={() => { }}/> );
 
     const allEvents = await getEvents();
     const allLocations = extractLocations(allEvents);
