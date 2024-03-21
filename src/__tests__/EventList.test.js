@@ -14,8 +14,9 @@ describe('<EventList/> component', () => {
 
   test.skip('renders correct number of events', async () => {
     const allEvents = await getEvents();
-    EventListComponent.rerender(<EventList events={[{ id: 1},{ id: 2},{ id: 3},{id: 4}]} />);
-    expect(EventListComponent.getAllByRole("listitem")).toHaveLength(4);
+    const eventList = screen.getByTestId("event-list");
+    eventList.rerender(<EventList events={[{ id: 1},{ id: 2},{ id: 3},{id: 4}]} />);
+    expect(screen.getAllByRole("listitem")).toHaveLength(4);
   });
 });
 
