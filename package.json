@@ -21,6 +21,8 @@
     "react-scripts": "5.0.1",
     "stream": "^0.0.2",
     "web-vitals": "^2.1.4",
+    "webpack": "^5.91.0",
+    "webpack-dev-server": "^5.0.4",
     "workbox-background-sync": "^6.6.0",
     "workbox-broadcast-update": "^6.6.0",
     "workbox-cacheable-response": "^6.6.0",
