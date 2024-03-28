@@ -12,7 +12,7 @@ export const extractLocations = (events) =>{
 
 export const checkToken = async(accessToken) =>{
     const response = await fetch(
-        'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}'
+        `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
     );
     const result = await response.json();
     return result;
@@ -44,7 +44,7 @@ export const getEvents = async () =>{
 
     if (token){
         removeQuery();
-        const url = "https://gk7ezk6tl6.execute-api.us-east-2.amazonaws.com/dev/api/get-events" + "/" + token;
+        const url = `https://gk7ezk6tl6.execute-api.us-east-2.amazonaws.com/dev/api/get-events/${token}`;
         const response = await fetch(url);
         const result = await response.json();
         if (result) {
@@ -75,7 +75,7 @@ export const getAccessToken = async ()=>{
 
 const getToken = async (code) =>{
     const encodeCode = encodeURIComponent(code);
-    const response = await fetch('arn:aws:lambda:us-east-2:058264145405:function:auth-server-dev-getAccessToken' + '/' + encodeCode );
+    const response = await fetch(`https://gk7ezk6tl6.execute-api.us-east-2.amazonaws.com/dev/api/token/${encodeCode}`);
     const {access_token} = await response.json();
     access_token && localStorage.setITem("access_token", access_token);
 
