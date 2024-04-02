@@ -1,10 +1,9 @@
 import CitySearch from "./components/CitySearch";
 import EventList from "./components/EventList";
 import NumberOfEvents from "./components/NumberOfEvents";
-import  InfoAlert  from "./components/Alert";
+import InfoAlert from "./components/Alert";
 import { useEffect, useState } from "react";
 import { getEvents, extractLocations } from "./api";
-import { act } from "@testing-library/react";
 import "./App.css";
 
 const App = () => {
@@ -25,18 +24,21 @@ const App = () => {
       currentCity === "See all cities"
         ? allEvents
         : allEvents.filter((event) => event.location === currentCity);
-    act(() => {
-      setEvents(filteredEvents.slice(0, currentNOE));
-      setAllLocations(extractLocations(allEvents));
-    });
+
+    setEvents(filteredEvents.slice(0, currentNOE));
+    setAllLocations(extractLocations(allEvents));
   };
 
   return (
     <div className="App">
       <div className="alerts-container">
-        {infoAlert.length ? <InfoAlert text={infoAlert} /> : null} 
+        {infoAlert.length ? <InfoAlert text={infoAlert} /> : null}
       </div>
-      <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} setInfoAlert={setInfoAlert}/>
+      <CitySearch
+        allLocations={allLocations}
+        setCurrentCity={setCurrentCity}
+        setInfoAlert={setInfoAlert}
+      />
       <NumberOfEvents />
       <EventList events={events} />
     </div>
