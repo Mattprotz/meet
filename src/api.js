@@ -67,7 +67,7 @@ export const getAccessToken = async () => {
       const { authURL } = result;
       return (window.location.href = authURL);
     }
-    return code && getAccessToken(code);
+    return code && getToken(code);
   }
   return accessToken;
 };
@@ -78,6 +78,7 @@ const getToken = async (code) => {
     `https://gk7ezk6tl6.execute-api.us-east-2.amazonaws.com/dev/api/token/${encodeCode}`
   );
   const { access_token } = await response.json();
+  console.log("access_token", access_token);
   access_token && localStorage.setITem("access_token", access_token);
 
   return access_token;

@@ -73,6 +73,7 @@
         // if the authorization code is not URL-encoded, then URL-encode it.
         if (decodeURIComponent(code) === code) {
           code = encodeURIComponent(codeValue.value);
+         
         }
         const getTokenRequest = getToken + "/" + code;
         fetch(getTokenRequest)
