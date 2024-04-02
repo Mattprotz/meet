@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 const { google } = require("googleapis");
 const calendar = google.calendar("v3");
 const SCOPES = [
-  "https://www.googleapis.com/auth/calendar.events.public.readonly"
+  "https://www.googleapis.com/auth/calendar.events.public.readonly",
 ];
 const { CLIENT_SECRET, CLIENT_ID, CALENDAR_ID } = process.env;
 const redirect_uris = ["https://Mattprotz.github.io/meet/"];
@@ -62,10 +62,13 @@ module.exports.getAccessToken = async (event) => {
 };
 
 module.exports.getCalendarEvents = async (event) => {
-  return new Promise((resolve, reject) => {
-    const accessToken = event.headers.Authorization;
-    oAuth2Client.setCredentials({ access_token: accessToken });
+  console.log(event);
 
+  const accessToken = decodeURIComponent(event.pathParameters.access_token);
+  console.log(accessToken);
+  oAuth2Client.setCredentials({ access_token: accessToken });
+
+  return new Promise((resolve, reject) => {
     calendar.events.list(
       {
         calendarId: CALENDAR_ID,
@@ -93,12 +96,14 @@ module.exports.getCalendarEvents = async (event) => {
       };
     })
     .catch((error) => {
+      console.log(error);
       return {
         statusCode: 500,
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Credentials": true,
         },
+        // body: JSON.stringify(error, null, 2),
         body: JSON.stringify({ error: "Internal Server Error" }),
       };
     });
