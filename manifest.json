@@ -1,6 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "id":"/meet/",
+  "start_url":"/meet/",
+  "short_name": "Meet",
+  "name": "Meet",
   "icons": [
     {
       "src": "favicon.ico",
