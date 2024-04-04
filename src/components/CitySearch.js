@@ -39,9 +39,9 @@ export default function CitySearch({ allLocations, setCurrentCity, setInfoAlert 
   }, [allLocations]);
 
   return (
-    <div id="city-search" data-testId="city-search">
+    <div id="city-search"data-testid="city-search">
       <input
-        data-testId="city-search-input"
+        data-testid="city-search-input"
         type="text"
         className="city"
         placeholder="Search for a City"
@@ -50,7 +50,7 @@ export default function CitySearch({ allLocations, setCurrentCity, setInfoAlert 
         onChange={handleInputChanged}
       />
       {showSuggestions ? (
-        <ul className="suggestions" data-testId="suggestions">
+        <ul className="suggestions"data-testid="suggestions">
           {suggestions.map((suggestion) => {
             return (
               <li onClick={handleItemClicked} key={suggestion}>

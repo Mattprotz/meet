@@ -11,9 +11,9 @@ export default function Event({ event }) {
     <li className="event">
       {/* <div testID="event-summary">{event.summary} </div> */}
       {showDetails && (
-        <div data-testId="event-description">{event.description}</div>
+        <div data-testid="event-description">{event.description}</div>
       )}
-      <button data-testId="details-button" onClick={toggleDetails}>
+      <button data-testid="details-button" onClick={toggleDetails}>
         {showDetails ? "Hide Details" : "Show Details"}
       </button>
     </li>
